@@ -9,12 +9,16 @@ class LocalDataSource @Inject constructor(
     private val popularMovieDao: PopularMovieDao
 ) : ILocalDataSource{
 
-    override fun getPopularMovie(): Flow<List<PopularMovieEntity>> {
-        return popularMovieDao.getAllPopularMovies()
+    override fun getPopularMovies(): Flow<List<PopularMovieEntity>> {
+        return popularMovieDao.getAllMovies()
     }
 
     override suspend fun insertPopularMovies(popularMovies: List<PopularMovieEntity>) {
-        popularMovieDao.insertPopularMovies(popularMovies = popularMovies)
+        popularMovieDao.insertMovies(popularMovies = popularMovies)
+    }
+
+    override suspend fun updatePopularMovie(popularMovie: PopularMovieEntity) {
+        popularMovieDao.updateMovie(popularMovie = popularMovie)
     }
 
 }

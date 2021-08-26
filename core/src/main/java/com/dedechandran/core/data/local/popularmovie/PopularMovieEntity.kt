@@ -12,7 +12,8 @@ data class PopularMovieEntity(
     @ColumnInfo(name = "image_url") val imageUrl: String?,
     @ColumnInfo(name = "overview") val overview: String?,
     @ColumnInfo(name = "release_date") val releaseDate: String?,
-    @ColumnInfo(name = "is_favorite") val isFavorite: Boolean
+    @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
+    @ColumnInfo(name = "genres") val genres: String
 )
 
 fun List<PopularMovieEntity>.toDomain(): List<PopularMovie>{
@@ -23,7 +24,8 @@ fun List<PopularMovieEntity>.toDomain(): List<PopularMovie>{
             imageUrl = it.imageUrl ?: "-",
             isFavorite = it.isFavorite,
             overview = it.overview ?: "-",
-            releaseDate = it.releaseDate ?: "-"
+            releaseDate = it.releaseDate ?: "-",
+            genres = it.genres
         )
     }
 }

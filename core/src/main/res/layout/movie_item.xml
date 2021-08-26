@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/divContainer"
-    android:foreground="?attr/selectableItemBackground"
-    android:layout_marginTop="@dimen/spacing_1"
-    android:layout_marginBottom="@dimen/spacing_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/spacing_4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="@dimen/spacing_1"
+    app:cardCornerRadius="@dimen/corner_radius_4"
+    android:layout_marginBottom="@dimen/spacing_1"
+    android:foreground="?attr/selectableItemBackground">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/corner_radius_4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="150dp"
-            android:layout_height="200dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/divMovieImage"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="@dimen/corner_radius_4"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivMovie"
@@ -27,17 +31,63 @@
                 android:scaleType="centerCrop"
                 android:src="@color/cardview_dark_background" />
 
-            <ImageView
-                android:id="@+id/ivMovieFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_4"
-                android:src="@drawable/ic_baseline_favorite_border_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_2"
+            app:layout_constraintEnd_toStartOf="@id/ivMovieFavorite"
+            app:layout_constraintStart_toEndOf="@id/divMovieImage"
+            app:layout_constraintTop_toTopOf="@id/divMovieImage"
+            tools:text="Movie title" />
 
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:id="@+id/ivMovieFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvOverview"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="Movie overview dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" />
+
+        <TextView
+            android:id="@+id/tvGenres"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/tvOverview"
+            app:layout_constraintStart_toStartOf="@id/tvOverview"
+            app:layout_constraintTop_toBottomOf="@id/tvOverview"
+            tools:text="Action, Thriller, Commedy" />
+
+        <TextView
+            android:layout_marginBottom="@dimen/spacing_2"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:id="@+id/tvReleaseDate"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvGenres"
+            app:layout_constraintStart_toStartOf="@id/tvGenres"
+            tools:text="18 Aug 2020" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

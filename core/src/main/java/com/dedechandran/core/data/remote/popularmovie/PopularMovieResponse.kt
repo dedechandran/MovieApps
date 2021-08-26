@@ -12,7 +12,8 @@ data class PopularMovieResponse(
         @SerializedName("poster_path") val posterPath: String?,
         @SerializedName("title") val title: String?,
         @SerializedName("overview") val overview: String?,
-        @SerializedName("release_date") val releaseDate: String?
+        @SerializedName("release_date") val releaseDate: String?,
+        @SerializedName("genre_ids") val genres: List<Int>?
     )
 }
 
@@ -21,10 +22,11 @@ fun PopularMovieResponse.toEntity(): List<PopularMovieEntity> {
         PopularMovieEntity(
             id = it.id,
             title = it.title,
-            imageUrl = it.posterPath,
+            imageUrl = "http://image.tmdb.org/t/p/w185${it.posterPath}",
             overview = it.overview,
             releaseDate = it.releaseDate,
-            isFavorite = false
+            isFavorite = false,
+            genres = it.genres?.joinToString(",") ?: "-"
         )
     }
 }

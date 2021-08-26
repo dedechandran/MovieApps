@@ -1,4 +1,4 @@
-package com.dedechandran.core.data.remote
+package com.dedechandran.core.wrapper
 
 sealed class ApiResponse<out R> {
     data class Success<out T>(val data: T) : ApiResponse<T>()

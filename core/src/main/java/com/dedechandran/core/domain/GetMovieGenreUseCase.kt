@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class GetPopularMovieUseCase @Inject constructor(
+class GetMovieGenreUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    fun getPopularMovie(): Flow<List<PopularMovie>> {
-        return movieRepository.getPopularMovie().flowOn(Dispatchers.IO)
+     fun getMovieGenre(): Flow<List<Genre>>{
+        return movieRepository.getMovieGenres().flowOn(Dispatchers.IO)
     }
 }

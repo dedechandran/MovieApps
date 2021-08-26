@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.dedechandran.core.R
 
 class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLBACK) {
-    private var setOnItemClickListener: ((String) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
+    private var onFavoriteIconClickListener: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardListViewHolder {
         val layout = when(viewType){
@@ -15,7 +16,11 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
             else -> R.layout.movie_item
         }
         val view = LayoutInflater.from(parent.context).inflate(layout,parent,false)
-        return CardListViewHolder(view)
+        return CardListViewHolder(
+            view = view,
+            favoriteIconListener = onFavoriteIconClickListener,
+            itemClickListener = onItemClickListener
+        )
     }
 
     override fun onBindViewHolder(holder: CardListViewHolder, position: Int) {
@@ -29,20 +34,32 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
     }
 
     fun setOnItemClickListener(listener: (String) -> Unit){
-        setOnItemClickListener = listener
+        onItemClickListener = listener
+    }
+
+    fun setOnFavoriteClickListener(listener: (String) -> Unit){
+        onFavoriteIconClickListener = listener
     }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CardItem>(){
             override fun areItemsTheSame(oldItem: CardItem, newItem: CardItem): Boolean {
-                return false
+                return when(oldItem) {
+                    is CardItem.Movie -> oldItem.id == (newItem as CardItem.Movie).id
+                    else -> false
+                }
             }
 
             override fun areContentsTheSame(oldItem: CardItem, newItem: CardItem): Boolean {
-                return false
+                return when(oldItem) {
+                    is CardItem.Movie -> oldItem == newItem as CardItem.Movie
+                    else -> false
+                }
             }
 
         }
+
+
 
         private const val MOVIE_ITEM_TYPE = 0
     }

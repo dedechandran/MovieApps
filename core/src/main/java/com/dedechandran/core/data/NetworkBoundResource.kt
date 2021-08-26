@@ -1,30 +1,20 @@
 package com.dedechandran.core.data
 
-import com.dedechandran.core.data.remote.ApiResponse
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
-    private val result: Flow<Resource<ResultType>> = flow {
-        emit(Resource.Loading())
+    private val result: Flow<ResultType> = flow {
         val dbSource = loadFromDb().first()
         if(shouldFetch(dbSource)){
-            emit(Resource.Loading())
-            when(val apiResponse = createCall().first()){
-                is ApiResponse.Success -> {
-                    saveCallResult(apiResponse.data)
-                    emitAll(loadFromDb().map { Resource.Success(it) })
-                }
-                is ApiResponse.Error -> {
-                    onFetchFailed()
-                    emit(Resource.Error<ResultType>(apiResponse.errorMessage))
-                }
-                is ApiResponse.Empty -> {
-                    emitAll(loadFromDb().map { Resource.Success(it) })
-                }
-            }
+            val apiResponse = createCall()
+            saveCallResult(apiResponse)
+            emitAll(loadFromDb())
         }else{
-            emitAll(loadFromDb().map { Resource.Success(it) })
+            emitAll(loadFromDb())
         }
     }
 
@@ -34,9 +24,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
+    protected abstract suspend fun createCall(): RequestType
 
     protected abstract suspend fun saveCallResult(data: RequestType)
 
-    fun asFlow(): Flow<Resource<ResultType>> = result
+    fun asFlow(): Flow<ResultType> = result
 }

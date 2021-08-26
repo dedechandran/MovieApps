@@ -1,16 +1,16 @@
 package com.dedechandran.core.data.local.popularmovie
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PopularMovieDao {
     @Query("SELECT * FROM popular_movie")
-    fun getAllPopularMovies(): Flow<List<PopularMovieEntity>>
+    fun getAllMovies(): Flow<List<PopularMovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPopularMovies(popularMovies: List<PopularMovieEntity>)
+    suspend fun insertMovies(popularMovies: List<PopularMovieEntity>)
+
+    @Update
+    suspend fun updateMovie(popularMovie: PopularMovieEntity)
 }
