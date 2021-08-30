@@ -27,10 +27,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:background="#4B000000"
+        android:id="@+id/toolbarDivider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#4B000000"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.dedechandran.core.ui.CardListView
         android:id="@+id/rvPopularMovie"
@@ -39,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarDivider" />
 
     <ProgressBar
         android:id="@+id/progressBar"

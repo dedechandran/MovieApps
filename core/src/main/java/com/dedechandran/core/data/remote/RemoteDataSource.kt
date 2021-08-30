@@ -1,5 +1,6 @@
 package com.dedechandran.core.data.remote
 
+import com.dedechandran.core.data.remote.details.MovieDetailsResponse
 import com.dedechandran.core.data.remote.popularmovie.PopularMovieResponse
 import javax.inject.Inject
 
@@ -12,6 +13,10 @@ class RemoteDataSource @Inject constructor(
     }
 
     override suspend fun getMovieGenres(): GenreResponse {
-        return apiService.getGenres("movie")
+        return apiService.getGenres(type = "movie")
+    }
+
+    override suspend fun getMovieDetails(movieId: String): MovieDetailsResponse {
+        return apiService.getMovieDetails(movieId = movieId)
     }
 }

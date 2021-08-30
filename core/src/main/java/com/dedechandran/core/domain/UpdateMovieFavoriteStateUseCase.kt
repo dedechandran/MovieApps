@@ -6,11 +6,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class UpdatePopularMovieUseCase @Inject constructor(
+class UpdateMovieFavoriteStateUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
 
-    fun updatePopularMovie(popularMovie: PopularMovie): Flow<Unit> {
-        return movieRepository.updatePopularMovie(popularMovie).flowOn(Dispatchers.IO)
+    fun updatePopularMovie(movieId: Int, isFavorite: Boolean): Flow<Unit> {
+        return movieRepository.updateMovieFavoriteState(movieId = movieId, isFavorite = isFavorite)
+            .flowOn(Dispatchers.IO)
     }
 }

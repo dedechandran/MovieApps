@@ -3,7 +3,7 @@ package com.dedechandran.core.di
 import android.content.Context
 import androidx.room.Room
 import com.dedechandran.core.data.AppDatabase
-import com.dedechandran.core.data.local.popularmovie.PopularMovieDao
+import com.dedechandran.core.data.local.popularmovie.MovieDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +26,7 @@ object DatabaseModule {
     }
 
     @Provides
-    fun providePopularMovieDao(appDatabase: AppDatabase): PopularMovieDao {
+    fun providePopularMovieDao(appDatabase: AppDatabase): MovieDao {
         return appDatabase.popularMovieDao()
     }
 

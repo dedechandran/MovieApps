@@ -1,6 +1,7 @@
 package com.dedechandran.core.data.remote.popularmovie
 
-import com.dedechandran.core.data.local.popularmovie.PopularMovieEntity
+import com.dedechandran.core.data.local.popularmovie.MovieEntity
+import com.dedechandran.core.domain.MovieType
 import com.google.gson.annotations.SerializedName
 
 data class PopularMovieResponse(
@@ -17,16 +18,20 @@ data class PopularMovieResponse(
     )
 }
 
-fun PopularMovieResponse.toEntity(): List<PopularMovieEntity> {
+fun PopularMovieResponse.toEntity(): List<MovieEntity> {
     return results.map {
-        PopularMovieEntity(
+        MovieEntity(
             id = it.id,
             title = it.title,
             imageUrl = "http://image.tmdb.org/t/p/w185${it.posterPath}",
             overview = it.overview,
             releaseDate = it.releaseDate,
             isFavorite = false,
-            genres = it.genres?.joinToString(",") ?: "-"
+            genres = it.genres?.joinToString(",") ?: "-",
+            revenue = null,
+            voteAverage = null,
+            movieType = MovieType.POPULAR.name,
+            runtime = null
         )
     }
 }

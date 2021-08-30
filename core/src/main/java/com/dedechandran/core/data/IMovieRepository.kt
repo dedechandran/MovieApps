@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface IMovieRepository {
     fun getPopularMovie(): Flow<List<PopularMovie>>
     fun getMovieGenres(): Flow<List<Genre>>
-    fun updatePopularMovie(popularMovie: PopularMovie): Flow<Unit>
+    fun updateMovieFavoriteState(movieId: Int, isFavorite: Boolean): Flow<Unit>
+    fun getFavoriteMovieDetails(movieId: Int): Flow<PopularMovie>
 }

@@ -16,7 +16,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getPopularMovieUseCase: GetPopularMovieUseCase,
     private val getMovieGenreUseCase: GetMovieGenreUseCase,
-    private val updatePopularMovieUseCase: UpdatePopularMovieUseCase
+    private val updateMovieFavoriteStateUseCase: UpdateMovieFavoriteStateUseCase
 ) : ViewModel() {
 
     private val uiState = MutableStateFlow<UiState<List<CardItem>>>(UiState.Loading)
@@ -66,7 +66,10 @@ class HomeViewModel @Inject constructor(
         )
         viewModelScope.launch {
             newUpdatedMovie?.let {
-                updatePopularMovieUseCase.updatePopularMovie(it)
+                updateMovieFavoriteStateUseCase.updatePopularMovie(
+                    movieId = updatedMovie.id.toInt(),
+                    isFavorite = newUpdatedMovie.isFavorite
+                )
                     .launchIn(this)
             }
         }
