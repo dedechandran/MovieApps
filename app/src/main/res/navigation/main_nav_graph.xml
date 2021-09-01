@@ -18,18 +18,17 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteGraph" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.dedechandran.movieapps.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
-    <fragment
-        android:id="@+id/favoriteFragment"
+    <include-dynamic
+        android:id="@+id/favoriteGraph"
         android:name="com.dedechandran.movieapps.favorite.FavoriteFragment"
         app:moduleName="MovieApps.favorite"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        app:graphResName="favorite_graph" />
 
 </navigation>
