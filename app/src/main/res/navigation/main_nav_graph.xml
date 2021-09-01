@@ -25,10 +25,10 @@
         android:name="com.dedechandran.movieapps.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
+
     <include-dynamic
         android:id="@+id/favoriteGraph"
-        android:name="com.dedechandran.movieapps.favorite.FavoriteFragment"
-        app:moduleName="MovieApps.favorite"
+        app:moduleName="favorite"
         app:graphResName="favorite_graph" />
 
 </navigation>
