@@ -1,9 +1,12 @@
 package com.dedechandran.movieapps
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dedechandran.core.domain.*
 import com.dedechandran.core.ui.CardItem
+import com.dedechandran.core.utils.formatDate
+import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.core.wrapper.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -19,14 +22,16 @@ class HomeViewModel @Inject constructor(
     private val updateMovieFavoriteStateUseCase: UpdateMovieFavoriteStateUseCase
 ) : ViewModel() {
 
-    private val uiState = MutableStateFlow<UiState<List<CardItem>>>(UiState.Loading)
-    val state = uiState
+    private val _state = MutableLiveData<Resource<List<CardItem>>>()
+    val state = _state
 
     private lateinit var genreList: List<Genre>
     private lateinit var popularMovies: List<PopularMovie>
+    private var isInitialize = false
 
     @FlowPreview
     fun initialize() {
+        if (isInitialize) return
         viewModelScope.launch {
             getMovieGenreUseCase.getMovieGenre()
                 .flatMapConcat {
@@ -40,7 +45,7 @@ class HomeViewModel @Inject constructor(
                             id = popularMovie.id,
                             urlImage = popularMovie.imageUrl,
                             title = popularMovie.title,
-                            releaseDate = popularMovie.releaseDate,
+                            releaseDate = popularMovie.releaseDate.formatDate(),
                             genres = popularMovie.genres.split(",").map {
                                 genreList.find { genre -> it.toInt() == genre.id }?.name
                             }.joinToString(","),
@@ -49,14 +54,16 @@ class HomeViewModel @Inject constructor(
                         )
                     }
                 }
+                .onStart { state.value = Resource.Loading() }
                 .onEach {
-                    state.value = UiState.Success(data = it)
+                    state.value = Resource.Success(data = it)
                 }
                 .catch {
-                    state.value = UiState.Error("Something went wrong")
+                    state.value = Resource.Error("Something went wrong")
                 }
                 .launchIn(this)
         }
+        isInitialize = true
     }
 
     fun onFavoriteIconClicked(id: String) {

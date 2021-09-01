@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_4"
+            android:background="?attr/actionBarItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,17 +31,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_2"
+            android:text="Details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivFavoriteIcon"
             app:layout_constraintStart_toEndOf="@id/ivArrowBack"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="Details" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivFavoriteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_4"
+            android:background="?attr/actionBarItemBackground"
             android:src="@drawable/ic_baseline_favorite_border_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +68,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/spacing_4">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvMovieDetails"
@@ -81,10 +84,10 @@
 
                 <ImageView
                     android:id="@+id/ivMovieDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="300dp"
+                    android:layout_height="450dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/test" />
+                    tools:src="@drawable/test" />
 
             </androidx.cardview.widget.CardView>
 
@@ -94,41 +97,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_4"
+                android:text="1h 30m"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvReleaseYearValue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvMovieDetails"
-                android:text="1h 30m" />
+                app:layout_constraintTop_toBottomOf="@id/cvMovieDetails" />
 
             <TextView
                 android:id="@+id/tvDurationLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_1"
+                android:text="Duration"
                 app:layout_constraintEnd_toEndOf="@+id/tvDurationValue"
                 app:layout_constraintStart_toStartOf="@+id/tvDurationValue"
-                app:layout_constraintTop_toBottomOf="@+id/tvDurationValue"
-                android:text="Duration" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDurationValue" />
 
             <TextView
                 android:id="@+id/tvReleaseYearValue"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="2020"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvVoteAvgValue"
                 app:layout_constraintStart_toEndOf="@+id/tvDurationValue"
-                app:layout_constraintTop_toTopOf="@+id/tvDurationValue"
-                android:text="2020" />
+                app:layout_constraintTop_toTopOf="@+id/tvDurationValue" />
 
             <TextView
                 android:id="@+id/tvReleaseYearLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Year"
                 app:layout_constraintEnd_toEndOf="@+id/tvReleaseYearValue"
                 app:layout_constraintStart_toStartOf="@+id/tvReleaseYearValue"
-                app:layout_constraintTop_toTopOf="@+id/tvDurationLabel"
-                android:text="Year" />
+                app:layout_constraintTop_toTopOf="@+id/tvDurationLabel" />
 
             <TextView
                 android:id="@+id/tvVoteAvgValue"
@@ -136,53 +139,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
+                android:text="7.8"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/tvRevenueValue"
+                app:layout_constraintEnd_toStartOf="@id/tvStatusValue"
                 app:layout_constraintStart_toEndOf="@+id/tvReleaseYearValue"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue"
-                android:text="7.8" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue" />
 
             <TextView
                 android:id="@+id/tvVoteAvgLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Vote"
                 app:layout_constraintEnd_toEndOf="@+id/tvVoteAvgValue"
                 app:layout_constraintStart_toStartOf="@+id/tvVoteAvgValue"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearLabel"
-                android:text="Vote" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearLabel" />
 
             <TextView
-                android:id="@+id/tvRevenueValue"
+                android:id="@+id/tvStatusValue"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
+                android:text="Released"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvVoteAvgValue"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue"
-                android:text="10m" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue" />
 
             <TextView
-                android:id="@+id/tvRevenueLabel"
+                android:id="@+id/tvStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/tvRevenueValue"
-                app:layout_constraintStart_toStartOf="@+id/tvRevenueValue"
-                app:layout_constraintTop_toTopOf="@+id/tvVoteAvgLabel"
-                android:text="Revenue" />
+                android:text="Status"
+                app:layout_constraintEnd_toEndOf="@+id/tvStatusValue"
+                app:layout_constraintStart_toStartOf="@+id/tvStatusValue"
+                app:layout_constraintTop_toTopOf="@+id/tvVoteAvgLabel" />
 
             <TextView
                 android:id="@+id/tvSynopsisLabel"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_4"
                 android:layout_marginHorizontal="@dimen/spacing_4"
+                android:layout_marginTop="@dimen/spacing_4"
+                android:text="Synopsis"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDurationLabel"
-                android:text="Synopsis" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDurationLabel" />
 
             <TextView
                 android:id="@+id/tvSynopsisValue"
@@ -192,7 +195,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tvSynopsisLabel"
                 app:layout_constraintStart_toStartOf="@+id/tvSynopsisLabel"
                 app:layout_constraintTop_toBottomOf="@+id/tvSynopsisLabel"
-                android:text="Synopsisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" />
+                tools:text="Synopsisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,10 +14,10 @@ interface MovieDao {
     @Query("UPDATE movie SET is_favorite = :isFavorite WHERE id = :id")
     suspend fun updateMovieFavoriteState(id: Int, isFavorite: Boolean)
 
-    @Query("UPDATE movie SET revenue = :revenue, runtime = :runtime, vote_average = :voteAverage WHERE id = :id")
+    @Query("UPDATE movie SET status = :status, runtime = :runtime, vote_average = :voteAverage WHERE id = :id")
     suspend fun updateMovieDetails(
         id: Int,
-        revenue: Long?,
+        status: String?,
         runtime: Int?,
         voteAverage: Double?
     )

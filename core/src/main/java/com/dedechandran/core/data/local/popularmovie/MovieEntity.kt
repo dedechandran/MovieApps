@@ -16,8 +16,8 @@ data class MovieEntity(
     @ColumnInfo(name = "genres") val genres: String,
     @ColumnInfo(name = "runtime") val runtime: Int?,
     @ColumnInfo(name = "vote_average") val voteAverage: Double?,
-    @ColumnInfo(name = "revenue") val revenue: Long?,
-    @ColumnInfo(name = "movie_type") val movieType: String
+    @ColumnInfo(name = "movie_type") val movieType: String,
+    @ColumnInfo(name = "status") val status: String?
 )
 
 fun List<MovieEntity>.toPopularMovieDomain(): List<PopularMovie> {
@@ -32,7 +32,7 @@ fun List<MovieEntity>.toPopularMovieDomain(): List<PopularMovie> {
             genres = it.genres,
             voteAverage = it.voteAverage ?: 0.0,
             movieType = it.movieType,
-            revenue = it.revenue ?: 0L,
+            status = it.status ?: "-",
             runtime = it.runtime ?: 0
         )
     }
@@ -49,7 +49,7 @@ fun MovieEntity.toPopularMovieDomain(): PopularMovie {
         genres = genres,
         voteAverage = voteAverage ?: 0.0,
         movieType = movieType,
-        revenue = revenue ?: 0L,
+        status = status ?: "-",
         runtime = runtime ?: 0
     )
 }

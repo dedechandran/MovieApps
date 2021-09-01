@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.core.wrapper.UiState
 import com.dedechandran.movieapps.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,26 +57,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.initialize()
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.state.collect { state ->
-                    when (state) {
-                        is UiState.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                        }
-                        is UiState.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            if (state.data.isNotEmpty()) {
-                                binding.rvPopularMovie.setItems(state.data)
-                            }
-                        }
-                        is UiState.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
-                                .show()
-                        }
+        vm.state.observe(viewLifecycleOwner){ state ->
+            when (state) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    state.data?.let {
+                        binding.rvPopularMovie.setItems(it)
                     }
-
+                }
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

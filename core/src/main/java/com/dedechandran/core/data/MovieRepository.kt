@@ -9,7 +9,6 @@ import com.dedechandran.core.data.remote.popularmovie.toEntity
 import com.dedechandran.core.domain.Genre
 import com.dedechandran.core.domain.MovieType
 import com.dedechandran.core.domain.PopularMovie
-import com.dedechandran.core.domain.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -81,7 +80,7 @@ class MovieRepository @Inject constructor(
             override suspend fun saveCallResult(data: MovieDetailsResponse) {
                 localDataSource.updateMovieDetails(
                     id = data.id,
-                    revenue = data.revenue,
+                    status = data.status,
                     runtime = data.runtime,
                     voteAverage = data.voteAverage
                 )

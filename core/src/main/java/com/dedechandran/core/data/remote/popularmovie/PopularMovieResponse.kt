@@ -28,7 +28,7 @@ fun PopularMovieResponse.toEntity(): List<MovieEntity> {
             releaseDate = it.releaseDate,
             isFavorite = false,
             genres = it.genres?.joinToString(",") ?: "-",
-            revenue = null,
+            status = null,
             voteAverage = null,
             movieType = MovieType.POPULAR.name,
             runtime = null

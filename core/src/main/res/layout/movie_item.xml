@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/spacing_4"
     android:layout_marginTop="@dimen/spacing_1"
-    app:cardCornerRadius="@dimen/corner_radius_4"
     android:layout_marginBottom="@dimen/spacing_1"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/corner_radius_4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,10 +45,11 @@
             tools:text="Movie title" />
 
         <ImageView
-            android:layout_marginEnd="@dimen/spacing_2"
             android:id="@+id/ivMovieFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:background="?attr/actionBarItemBackground"
             android:src="@drawable/ic_baseline_favorite_border_24"
             app:layout_constraintBottom_toBottomOf="@id/tvTitle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +77,12 @@
             tools:text="Action, Thriller, Commedy" />
 
         <TextView
-            android:layout_marginBottom="@dimen/spacing_2"
-            android:layout_marginEnd="@dimen/spacing_2"
             android:id="@+id/tvReleaseDate"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:layout_marginBottom="@dimen/spacing_2"
             android:gravity="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tvGenres"

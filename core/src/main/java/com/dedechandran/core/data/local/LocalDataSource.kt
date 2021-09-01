@@ -23,11 +23,11 @@ class LocalDataSource @Inject constructor(
 
     override suspend fun updateMovieDetails(
         id: Int,
-        revenue: Long?,
+        status: String?,
         runtime: Int?,
         voteAverage: Double?
     ) {
-        movieDao.updateMovieDetails(id = id, revenue = revenue, runtime = runtime, voteAverage = voteAverage)
+        movieDao.updateMovieDetails(id = id, status = status, runtime = runtime, voteAverage = voteAverage)
     }
 
     override fun getMovieById(movieId: Int): Flow<MovieEntity> {

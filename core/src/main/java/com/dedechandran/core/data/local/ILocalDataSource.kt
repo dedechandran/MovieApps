@@ -9,7 +9,7 @@ interface ILocalDataSource {
     suspend fun updateMovieFavoriteState(movieId: Int, isFavorite: Boolean)
     suspend fun updateMovieDetails(
         id: Int,
-        revenue: Long?,
+        status: String?,
         runtime: Int?,
         voteAverage: Double?
     )
