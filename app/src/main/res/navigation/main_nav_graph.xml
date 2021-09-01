@@ -16,10 +16,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.dedechandran.movieapps.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.dedechandran.movieapps.favorite.FavoriteFragment"
+        app:moduleName="MovieApps.favorite"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+
 </navigation>

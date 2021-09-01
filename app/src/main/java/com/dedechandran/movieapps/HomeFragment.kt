@@ -50,6 +50,9 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
+        binding.tvToolbarTitle.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+        }
         return binding.root
     }
 
