@@ -3,28 +3,28 @@ package com.dedechandran.movieapps
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dedechandran.core.domain.GetPopularMovieDetails
-import com.dedechandran.core.domain.PopularMovie
-import com.dedechandran.core.domain.UpdateMovieFavoriteStateUseCase
+import com.dedechandran.core.domain.Movie
+import com.dedechandran.core.domain.MovieInteractor
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val getPopularMovieDetails: GetPopularMovieDetails,
-    private val updateMovieFavoriteStateUseCase: UpdateMovieFavoriteStateUseCase
+    private val movieInteractor: MovieInteractor
 ) : ViewModel() {
 
-    private var response: PopularMovie? = null
-    private val _state = MutableLiveData<Resource<PopularMovie>>()
+    private var response: Movie? = null
+    private val _state = MutableLiveData<Resource<Movie>>()
     val state = _state
 
     fun initialize(movieId: Int) {
         viewModelScope.launch {
-            getPopularMovieDetails.getPopularMovieDetails(movieId = movieId)
+            movieInteractor.getMovieDetails(movieId = movieId)
                 .onEach {
                     _state.value = Resource.Success(it)
                     response = it
@@ -39,7 +39,7 @@ class DetailsViewModel @Inject constructor(
     fun onFavoriteIconClicked(id: String) {
         response?.let {
             viewModelScope.launch {
-                updateMovieFavoriteStateUseCase.updatePopularMovie(
+                movieInteractor.updateFavoriteMovieState(
                     movieId = id.toInt(),
                     isFavorite = !it.isFavorite
                 ).launchIn(this)

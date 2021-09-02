@@ -14,4 +14,5 @@ interface ILocalDataSource {
         voteAverage: Double?
     )
     fun getMovieById(movieId: Int): Flow<MovieEntity>
+    fun getFavoriteMovies(): Flow<List<MovieEntity>>
 }

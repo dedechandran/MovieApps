@@ -1,14 +1,14 @@
 package com.dedechandran.core.data
 
 import com.dedechandran.core.data.local.LocalDataSource
-import com.dedechandran.core.data.local.popularmovie.toPopularMovieDomain
+import com.dedechandran.core.data.local.popularmovie.toMovieDomain
 import com.dedechandran.core.data.remote.RemoteDataSource
 import com.dedechandran.core.data.remote.details.MovieDetailsResponse
 import com.dedechandran.core.data.remote.popularmovie.PopularMovieResponse
 import com.dedechandran.core.data.remote.popularmovie.toEntity
 import com.dedechandran.core.domain.Genre
 import com.dedechandran.core.domain.MovieType
-import com.dedechandran.core.domain.PopularMovie
+import com.dedechandran.core.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -18,15 +18,15 @@ class MovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : IMovieRepository {
-    override fun getPopularMovie(): Flow<List<PopularMovie>> {
-        return object : NetworkBoundResource<List<PopularMovie>, PopularMovieResponse>() {
-            override fun loadFromDb(): Flow<List<PopularMovie>> {
+    override fun getPopularMovie(): Flow<List<Movie>> {
+        return object : NetworkBoundResource<List<Movie>, PopularMovieResponse>() {
+            override fun loadFromDb(): Flow<List<Movie>> {
                 return localDataSource.getMovies(type = MovieType.POPULAR.name).map {
-                    it.toPopularMovieDomain()
+                    it.toMovieDomain()
                 }
             }
 
-            override fun shouldFetch(data: List<PopularMovie>?): Boolean {
+            override fun shouldFetch(data: List<Movie>?): Boolean {
                 return data.isNullOrEmpty()
             }
 
@@ -61,15 +61,15 @@ class MovieRepository @Inject constructor(
         }
     }
 
-    override fun getFavoriteMovieDetails(movieId: Int): Flow<PopularMovie> {
-        return object : NetworkBoundResource<PopularMovie, MovieDetailsResponse>() {
-            override fun loadFromDb(): Flow<PopularMovie> {
+    override fun getMovieDetails(movieId: Int): Flow<Movie> {
+        return object : NetworkBoundResource<Movie, MovieDetailsResponse>() {
+            override fun loadFromDb(): Flow<Movie> {
                 return localDataSource.getMovieById(movieId = movieId).map {
-                    it.toPopularMovieDomain()
+                    it.toMovieDomain()
                 }
             }
 
-            override fun shouldFetch(data: PopularMovie?): Boolean {
+            override fun shouldFetch(data: Movie?): Boolean {
                 return data?.runtime == 0
             }
 
@@ -87,6 +87,14 @@ class MovieRepository @Inject constructor(
             }
 
         }.asFlow()
+    }
+
+    override fun getFavoriteMovie(): Flow<List<Movie>> {
+        return localDataSource.getFavoriteMovies().map {
+            it.map { movieEntity ->
+                movieEntity.toMovieDomain()
+            }
+        }
     }
 
 

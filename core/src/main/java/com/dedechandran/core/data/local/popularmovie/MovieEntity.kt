@@ -3,7 +3,7 @@ package com.dedechandran.core.data.local.popularmovie
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dedechandran.core.domain.PopularMovie
+import com.dedechandran.core.domain.Movie
 
 @Entity(tableName = "movie")
 data class MovieEntity(
@@ -20,9 +20,9 @@ data class MovieEntity(
     @ColumnInfo(name = "status") val status: String?
 )
 
-fun List<MovieEntity>.toPopularMovieDomain(): List<PopularMovie> {
+fun List<MovieEntity>.toMovieDomain(): List<Movie> {
     return this.map {
-        PopularMovie(
+        Movie(
             id = it.id.toString(),
             title = it.title ?: "-",
             imageUrl = it.imageUrl ?: "-",
@@ -38,8 +38,8 @@ fun List<MovieEntity>.toPopularMovieDomain(): List<PopularMovie> {
     }
 }
 
-fun MovieEntity.toPopularMovieDomain(): PopularMovie {
-    return PopularMovie(
+fun MovieEntity.toMovieDomain(): Movie {
+    return Movie(
         id = id.toString(),
         title = title ?: "-",
         imageUrl = imageUrl ?: "-",

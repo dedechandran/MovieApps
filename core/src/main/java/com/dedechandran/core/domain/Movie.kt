@@ -1,8 +1,6 @@
 package com.dedechandran.core.domain
 
-import com.dedechandran.core.data.local.popularmovie.MovieEntity
-
-data class PopularMovie(
+data class Movie(
     val id: String,
     val title: String,
     val overview: String,

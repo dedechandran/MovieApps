@@ -7,7 +7,6 @@ import com.dedechandran.core.domain.*
 import com.dedechandran.core.ui.CardItem
 import com.dedechandran.core.utils.formatDate
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.core.wrapper.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -17,29 +16,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPopularMovieUseCase: GetPopularMovieUseCase,
-    private val getMovieGenreUseCase: GetMovieGenreUseCase,
-    private val updateMovieFavoriteStateUseCase: UpdateMovieFavoriteStateUseCase
+    private val movieInteractor: MovieInteractor
 ) : ViewModel() {
 
     private val _state = MutableLiveData<Resource<List<CardItem>>>()
     val state = _state
 
     private lateinit var genreList: List<Genre>
-    private lateinit var popularMovies: List<PopularMovie>
+    private lateinit var movies: List<Movie>
     private var isInitialize = false
 
     @FlowPreview
     fun initialize() {
         if (isInitialize) return
         viewModelScope.launch {
-            getMovieGenreUseCase.getMovieGenre()
+            movieInteractor.getMovieGenre()
                 .flatMapConcat {
                     genreList = it
-                    getPopularMovieUseCase.getPopularMovie()
+                    movieInteractor.getPopularMovie()
                 }
                 .map {
-                    popularMovies = it
+                    movies = it
                     it.map { popularMovie ->
                         CardItem.Movie(
                             id = popularMovie.id,
@@ -67,13 +64,13 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onFavoriteIconClicked(id: String) {
-        val updatedMovie = popularMovies.find { it.id == id }
+        val updatedMovie = movies.find { it.id == id }
         val newUpdatedMovie = updatedMovie?.copy(
             isFavorite = !updatedMovie.isFavorite
         )
         viewModelScope.launch {
             newUpdatedMovie?.let {
-                updateMovieFavoriteStateUseCase.updatePopularMovie(
+                movieInteractor.updateFavoriteMovieState(
                     movieId = updatedMovie.id.toInt(),
                     isFavorite = newUpdatedMovie.isFavorite
                 )
