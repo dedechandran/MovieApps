@@ -38,19 +38,7 @@ class FavoriteMovieViewModel @Inject constructor(
                 }
                 .map {
                     movies = it
-                    it.map { popularMovie ->
-                        CardItem.Movie(
-                            id = popularMovie.id,
-                            urlImage = popularMovie.imageUrl,
-                            title = popularMovie.title,
-                            releaseDate = popularMovie.releaseDate.formatDate(),
-                            genres = popularMovie.genres.split(",").map {
-                                genreList.find { genre -> it.toInt() == genre.id }?.name
-                            }.joinToString(","),
-                            overview = popularMovie.overview,
-                            isFavorite = popularMovie.isFavorite
-                        )
-                    }
+                    it.toDisplayItem(genreList = genreList)
                 }
                 .onStart { _state.value = Resource.Loading() }
                 .onEach {
