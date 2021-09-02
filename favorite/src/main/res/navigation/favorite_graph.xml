@@ -20,6 +20,6 @@
 
     <fragment
         android:id="@+id/favoriteDetails"
-        android:name="com.dedechandran.movieapps.DetailsFragment"
+        android:name="com.dedechandran.movieapps.ui.details.DetailsFragment"
         android:label="DetailsFragment" />
 </navigation>

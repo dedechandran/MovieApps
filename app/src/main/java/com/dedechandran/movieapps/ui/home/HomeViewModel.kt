@@ -1,11 +1,10 @@
-package com.dedechandran.movieapps
+package com.dedechandran.movieapps.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dedechandran.core.domain.*
 import com.dedechandran.core.ui.CardItem
-import com.dedechandran.core.utils.formatDate
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview

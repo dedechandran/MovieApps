@@ -1,17 +1,17 @@
-package com.dedechandran.movieapps
+package com.dedechandran.movieapps.ui.details
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.dedechandran.core.utils.convertDuration
 import com.dedechandran.core.utils.getYear
 import com.dedechandran.core.wrapper.Resource
+import com.dedechandran.movieapps.BaseFragmentBinding
+import com.dedechandran.movieapps.R
 import com.dedechandran.movieapps.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 

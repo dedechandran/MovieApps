@@ -1,4 +1,4 @@
-package com.dedechandran.movieapps
+package com.dedechandran.movieapps.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

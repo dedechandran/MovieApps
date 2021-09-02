@@ -1,27 +1,20 @@
-package com.dedechandran.movieapps
+package com.dedechandran.movieapps.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.core.wrapper.UiState
-import com.dedechandran.movieapps.DetailsFragment.Companion.MOVIE_ID_EXTRAS
+import com.dedechandran.movieapps.BaseFragmentBinding
+import com.dedechandran.movieapps.R
+import com.dedechandran.movieapps.ui.details.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import com.dedechandran.movieapps.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_home) {
