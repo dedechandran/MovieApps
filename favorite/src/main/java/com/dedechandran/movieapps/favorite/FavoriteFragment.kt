@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
+import com.dedechandran.movieapps.BaseFragmentBinding
+import com.dedechandran.movieapps.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import com.dedechandran.movieapps.favorite.databinding.FragmentFavoriteBinding
 import com.dedechandran.movieapps.favorite.di.DaggerFavoriteComponent
 import com.dedechandran.movieapps.di.FavoriteDependencies
@@ -18,14 +20,14 @@ import com.dedechandran.movieapps.favorite.di.ViewModelFactory
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var binding: FragmentFavoriteBinding
     private lateinit var vm: FavoriteMovieViewModel
-    private val navController by lazy {
-        findNavController()
+
+    override fun initializeViewBinding(view: View): FragmentFavoriteBinding {
+        return FragmentFavoriteBinding.bind(view)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,17 +47,16 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_favorite, container, false)
-        binding = FragmentFavoriteBinding.bind(view)
+        super.onCreateView(inflater, container, savedInstanceState)
         vm = ViewModelProvider(this, viewModelFactory)[FavoriteMovieViewModel::class.java]
         binding.rvFavoriteMovie.apply {
             setOnFavoriteClickListener { id, isFavorite ->
                 vm.onFavoriteIconClicked(id, isFavorite)
             }
             setOnItemClickListener {
-                val args = bundleOf("MOVIE_ID" to it)
+                val args = bundleOf(MOVIE_ID_EXTRAS to it)
                 navController.navigate(R.id.action_favoriteFragment_to_favoriteDetails, args)
             }
             setHasFixedSize(true)

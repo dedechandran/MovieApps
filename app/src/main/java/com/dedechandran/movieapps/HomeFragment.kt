@@ -24,21 +24,19 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val vm: HomeViewModel by viewModels()
-    private lateinit var binding: FragmentHomeBinding
-    private val navController by lazy {
-        findNavController()
+
+    override fun initializeViewBinding(view: View): FragmentHomeBinding {
+        return FragmentHomeBinding.bind(view)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        binding = FragmentHomeBinding.bind(view)
+        super.onCreateView(inflater, container, savedInstanceState)
         binding.rvPopularMovie.apply {
             setOnFavoriteClickListener { id, isFavorite ->
                 vm.onFavoriteIconClicked(id = id, isFavorite = isFavorite)
@@ -79,4 +77,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 }

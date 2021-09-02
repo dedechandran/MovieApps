@@ -16,22 +16,19 @@ import com.dedechandran.movieapps.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
+class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fragment_details) {
 
-    private lateinit var binding: FragmentDetailsBinding
     private val vm by viewModels<DetailsViewModel>()
-    private val navController by lazy {
-        findNavController()
+
+    override fun initializeViewBinding(view: View): FragmentDetailsBinding {
+        return FragmentDetailsBinding.bind(view)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_details, container, false)
-        binding = FragmentDetailsBinding.bind(view)
-        return binding.root
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,7 +77,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    companion object{
+    companion object {
         const val MOVIE_ID_EXTRAS = "MOVIE_ID_EXTRAS"
         private const val DEFAULT_MOVIE_ID = "0"
     }
