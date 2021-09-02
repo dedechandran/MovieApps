@@ -18,7 +18,12 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteGraph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
@@ -27,11 +32,10 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 
-    <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.dedechandran.movieapps.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
+    <include-dynamic
+        android:id="@+id/favoriteGraph"
+        android:label="Favorite"
         app:moduleName="favorite"
-        tools:layout="@layout/fragment_favorite" />
+        app:graphResName="favorite_graph" />
 
 </navigation>
