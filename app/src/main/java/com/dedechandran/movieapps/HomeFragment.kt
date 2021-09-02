@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.core.wrapper.UiState
+import com.dedechandran.movieapps.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import com.dedechandran.movieapps.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -27,6 +28,9 @@ class HomeFragment : Fragment() {
 
     private val vm: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
+    private val navController by lazy {
+        findNavController()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +40,18 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         binding = FragmentHomeBinding.bind(view)
         binding.rvPopularMovie.apply {
-            setOnFavoriteClickListener {
-                vm.onFavoriteIconClicked(it)
+            setOnFavoriteClickListener { id, isFavorite ->
+                vm.onFavoriteIconClicked(id = id, isFavorite = isFavorite)
             }
             setOnItemClickListener {
-                val args = bundleOf("MOVIE_ID" to it )
-                findNavController().navigate(R.id.action_homeFragment_to_detailsFragment, args)
+                val args = bundleOf(MOVIE_ID_EXTRAS to it)
+                navController.navigate(R.id.action_homeFragment_to_detailsFragment, args)
             }
             setHasFixedSize(true)
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
         binding.tvToolbarTitle.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+            navController.navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
         return binding.root
     }
@@ -56,7 +60,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.initialize()
-        vm.state.observe(viewLifecycleOwner){ state ->
+        vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE

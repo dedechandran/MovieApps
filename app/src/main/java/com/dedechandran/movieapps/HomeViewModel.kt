@@ -65,19 +65,12 @@ class HomeViewModel @Inject constructor(
         isInitialize = true
     }
 
-    fun onFavoriteIconClicked(id: String) {
-        val updatedMovie = movies.find { it.id == id }
-        val newUpdatedMovie = updatedMovie?.copy(
-            isFavorite = !updatedMovie.isFavorite
-        )
+    fun onFavoriteIconClicked(id: String, isFavorite: Boolean) {
         viewModelScope.launch {
-            newUpdatedMovie?.let {
-                updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
-                    movieId = updatedMovie.id.toInt(),
-                    isFavorite = newUpdatedMovie.isFavorite
-                )
-                    .launchIn(this)
-            }
+            updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
+                movieId = id.toInt(),
+                isFavorite = !isFavorite
+            ).launchIn(this)
         }
     }
 

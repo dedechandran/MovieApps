@@ -35,7 +35,7 @@ class CardListView @JvmOverloads constructor(
         cardListAdapter.setOnItemClickListener(listener)
     }
 
-    fun setOnFavoriteClickListener(listener: (String) -> Unit){
+    fun setOnFavoriteClickListener(listener: (String, Boolean) -> Unit){
         cardListAdapter.setOnFavoriteClickListener(listener)
     }
 

@@ -51,8 +51,8 @@ class FavoriteFragment : Fragment() {
         binding = FragmentFavoriteBinding.bind(view)
         vm = ViewModelProvider(this, viewModelFactory)[FavoriteMovieViewModel::class.java]
         binding.rvFavoriteMovie.apply {
-            setOnFavoriteClickListener {
-                vm.onFavoriteIconClicked(it)
+            setOnFavoriteClickListener { id, isFavorite ->
+                vm.onFavoriteIconClicked(id, isFavorite)
             }
             setOnItemClickListener {
                 val args = bundleOf("MOVIE_ID" to it)
@@ -70,7 +70,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.initialize()
-        vm.state.observe(viewLifecycleOwner){ state ->
+        vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE

@@ -36,7 +36,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args = arguments?.getString("MOVIE_ID") ?: "0"
+        val args = arguments?.getString(MOVIE_ID_EXTRAS) ?: DEFAULT_MOVIE_ID
         setListener(args)
         vm.initialize(args.toInt())
         vm.state.observe(viewLifecycleOwner) { state ->
@@ -78,5 +78,10 @@ class DetailsFragment : Fragment() {
         binding.ivArrowBack.setOnClickListener {
             navController.popBackStack()
         }
+    }
+
+    companion object{
+        const val MOVIE_ID_EXTRAS = "MOVIE_ID_EXTRAS"
+        private const val DEFAULT_MOVIE_ID = "0"
     }
 }

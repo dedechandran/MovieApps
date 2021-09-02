@@ -8,7 +8,7 @@ import com.dedechandran.core.databinding.MovieItemBinding
 
 class CardListViewHolder(
     view: View,
-    private val favoriteIconListener: ((String) -> Unit)? = null,
+    private val favoriteIconListener: ((String, Boolean) -> Unit)? = null,
     private val itemClickListener: ((String) -> Unit)? = null
 ) : RecyclerView.ViewHolder(view) {
 
@@ -34,7 +34,7 @@ class CardListViewHolder(
             }
             ivMovieFavorite.setImageResource(favoriteIcon)
             ivMovieFavorite.setOnClickListener {
-                favoriteIconListener?.invoke(item.id)
+                favoriteIconListener?.invoke(item.id, item.isFavorite)
             }
             divContainer.setOnClickListener {
                 itemClickListener?.invoke(item.id)
