@@ -16,7 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val movieInteractor: MovieInteractor
+    private val getPopularMovieUseCase: GetPopularMovieUseCase,
+    private val getMovieGenreUseCase: GetMovieGenreUseCase,
+    private val updateFavoriteMovieStateUseCase: UpdateFavoriteMovieStateUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<Resource<List<CardItem>>>()
@@ -30,10 +32,10 @@ class HomeViewModel @Inject constructor(
     fun initialize() {
         if (isInitialize) return
         viewModelScope.launch {
-            movieInteractor.getMovieGenre()
+            getMovieGenreUseCase.getMovieGenre()
                 .flatMapConcat {
                     genreList = it
-                    movieInteractor.getPopularMovie()
+                    getPopularMovieUseCase.getPopularMovie()
                 }
                 .map {
                     movies = it
@@ -70,7 +72,7 @@ class HomeViewModel @Inject constructor(
         )
         viewModelScope.launch {
             newUpdatedMovie?.let {
-                movieInteractor.updateFavoriteMovieState(
+                updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
                     movieId = updatedMovie.id.toInt(),
                     isFavorite = newUpdatedMovie.isFavorite
                 )

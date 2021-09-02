@@ -3,8 +3,9 @@ package com.dedechandran.movieapps
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dedechandran.core.domain.GetMovieDetailsUseCase
 import com.dedechandran.core.domain.Movie
-import com.dedechandran.core.domain.MovieInteractor
+import com.dedechandran.core.domain.UpdateFavoriteMovieStateUseCase
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val movieInteractor: MovieInteractor
+    private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
+    private val updateFavoriteMovieStateUseCase: UpdateFavoriteMovieStateUseCase
 ) : ViewModel() {
 
     private var response: Movie? = null
@@ -24,7 +26,7 @@ class DetailsViewModel @Inject constructor(
 
     fun initialize(movieId: Int) {
         viewModelScope.launch {
-            movieInteractor.getMovieDetails(movieId = movieId)
+            getMovieDetailsUseCase.getMovieDetails(movieId = movieId)
                 .onEach {
                     _state.value = Resource.Success(it)
                     response = it
@@ -39,7 +41,7 @@ class DetailsViewModel @Inject constructor(
     fun onFavoriteIconClicked(id: String) {
         response?.let {
             viewModelScope.launch {
-                movieInteractor.updateFavoriteMovieState(
+                updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
                     movieId = id.toInt(),
                     isFavorite = !it.isFavorite
                 ).launchIn(this)
