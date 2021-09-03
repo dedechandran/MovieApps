@@ -8,7 +8,6 @@ import com.dedechandran.core.databinding.MovieItemBinding
 
 class CardListViewHolder(
     view: View,
-    private val favoriteIconListener: ((String, Boolean) -> Unit)? = null,
     private val itemClickListener: ((String) -> Unit)? = null
 ) : RecyclerView.ViewHolder(view) {
 
@@ -27,15 +26,6 @@ class CardListViewHolder(
             tvGenres.text = item.genres
             tvOverview.text = item.overview
             tvReleaseDate.text = item.releaseDate
-            val favoriteIcon = if (item.isFavorite) {
-                R.drawable.ic_baseline_favorite_24
-            } else {
-                R.drawable.ic_baseline_favorite_border_24
-            }
-            ivMovieFavorite.setImageResource(favoriteIcon)
-            ivMovieFavorite.setOnClickListener {
-                favoriteIconListener?.invoke(item.id, item.isFavorite)
-            }
             divContainer.setOnClickListener {
                 itemClickListener?.invoke(item.id)
             }

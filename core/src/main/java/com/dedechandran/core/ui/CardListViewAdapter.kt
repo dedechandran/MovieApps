@@ -8,7 +8,6 @@ import com.dedechandran.core.R
 
 class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLBACK) {
     private var onItemClickListener: ((String) -> Unit)? = null
-    private var onFavoriteIconClickListener: ((String, Boolean) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardListViewHolder {
         val layout = when(viewType){
@@ -18,7 +17,6 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
         val view = LayoutInflater.from(parent.context).inflate(layout,parent,false)
         return CardListViewHolder(
             view = view,
-            favoriteIconListener = onFavoriteIconClickListener,
             itemClickListener = onItemClickListener
         )
     }
@@ -35,10 +33,6 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
 
     fun setOnItemClickListener(listener: (String) -> Unit){
         onItemClickListener = listener
-    }
-
-    fun setOnFavoriteClickListener(listener: (String, Boolean) -> Unit){
-        onFavoriteIconClickListener = listener
     }
 
     companion object {

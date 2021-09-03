@@ -39,21 +39,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_2"
-            app:layout_constraintEnd_toStartOf="@id/ivMovieFavorite"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/divMovieImage"
             app:layout_constraintTop_toTopOf="@id/divMovieImage"
             tools:text="Movie title" />
 
-        <ImageView
-            android:id="@+id/ivMovieFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_2"
-            android:background="?attr/actionBarItemBackground"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            app:layout_constraintBottom_toBottomOf="@id/tvTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvTitle" />
 
         <TextView
             android:id="@+id/tvOverview"

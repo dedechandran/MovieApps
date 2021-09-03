@@ -54,13 +54,4 @@ class FavoriteMovieViewModel @Inject constructor(
         }
         isInitialize = true
     }
-
-    fun onFavoriteIconClicked(id: String, isFavorite: Boolean) {
-        viewModelScope.launch {
-            updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
-                movieId = id.toInt(),
-                isFavorite = !isFavorite
-            ).launchIn(this)
-        }
-    }
 }

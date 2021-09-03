@@ -50,9 +50,6 @@ class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.f
         super.onCreateView(inflater, container, savedInstanceState)
         vm = ViewModelProvider(this, viewModelFactory)[FavoriteMovieViewModel::class.java]
         binding.rvFavoriteMovie.apply {
-            setOnFavoriteClickListener { id, isFavorite ->
-                vm.onFavoriteIconClicked(id, isFavorite)
-            }
             setOnItemClickListener {
                 val args = bundleOf(MOVIE_ID_EXTRAS to it)
                 navController.navigate(R.id.action_favoriteFragment_to_favoriteDetails, args)

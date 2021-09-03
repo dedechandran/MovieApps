@@ -33,9 +33,6 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
 
     private fun setupUi() {
         binding.rvPopularMovie.apply {
-            setOnFavoriteClickListener { id, isFavorite ->
-                vm.onFavoriteIconClicked(id = id, isFavorite = isFavorite)
-            }
             setOnItemClickListener {
                 val args = bundleOf(MOVIE_ID_EXTRAS to it)
                 navController.navigate(R.id.action_homeFragment_to_detailsFragment, args)
