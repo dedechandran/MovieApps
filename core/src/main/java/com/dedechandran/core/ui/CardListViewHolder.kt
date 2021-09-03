@@ -20,15 +20,22 @@ class CardListViewHolder(
     private fun bindMovieItem(item: CardItem.Movie) {
         val binding = MovieItemBinding.bind(itemView)
         with(binding) {
-            Glide.with(itemView).load(item.urlImage)
-                .into(ivMovie)
-            tvTitle.text = item.title
-            tvGenres.text = item.genres
-            tvOverview.text = item.overview
-            tvReleaseDate.text = item.releaseDate
+            item.urlImage?.let {
+                Glide.with(itemView).load(item.urlImage)
+                    .into(ivMovie)
+            } ?: ivMovie.setImageResource(R.drawable.ic_baseline_broken_image_24)
+
+            tvTitle.text = item.title ?: NO_DATA
+            tvGenres.text = item.genres ?: NO_DATA
+            tvOverview.text = item.overview ?: NO_DATA
+            tvReleaseDate.text = item.releaseDate ?: NO_DATA
             divContainer.setOnClickListener {
                 itemClickListener?.invoke(item.id)
             }
         }
+    }
+
+    companion object {
+        private const val NO_DATA = "-"
     }
 }

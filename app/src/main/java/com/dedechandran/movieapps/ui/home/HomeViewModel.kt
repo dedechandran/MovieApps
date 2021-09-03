@@ -21,8 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPopularMovieUseCase: GetPopularMovieUseCase,
-    private val getMovieGenreUseCase: GetMovieGenreUseCase,
-    private val updateFavoriteMovieStateUseCase: UpdateFavoriteMovieStateUseCase
+    private val getMovieGenreUseCase: GetMovieGenreUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<Resource<List<CardItem>>>()
@@ -50,11 +49,15 @@ class HomeViewModel @Inject constructor(
                     state.value = Resource.Success(data = it)
                 }
                 .catch {
-                    state.value = Resource.Error("Something went wrong")
+                    state.value = Resource.Error(ERROR_MESSAGE)
                 }
                 .launchIn(this)
         }
         isInitialize = true
+    }
+
+    companion object {
+        private const val ERROR_MESSAGE = "Something went wrong"
     }
 
 }

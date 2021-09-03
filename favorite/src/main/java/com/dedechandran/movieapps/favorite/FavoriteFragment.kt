@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.movieapps.BaseFragmentBinding
+import com.dedechandran.movieapps.ui.BaseFragmentBinding
 import com.dedechandran.movieapps.di.FavoriteDependencies
 import com.dedechandran.movieapps.favorite.databinding.FragmentFavoriteBinding
 import com.dedechandran.movieapps.favorite.di.DaggerFavoriteComponent
@@ -42,12 +42,14 @@ class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.f
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        super.onCreateView(inflater, container, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUi()
+        vm.initialize()
+        observeData()
+    }
+
+    private fun setupUi() {
         vm = ViewModelProvider(this, viewModelFactory)[FavoriteMovieViewModel::class.java]
         binding.rvFavoriteMovie.apply {
             setOnItemClickListener {
@@ -60,12 +62,9 @@ class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.f
         binding.ivArrowBack.setOnClickListener {
             navController.popBackStack()
         }
-        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        vm.initialize()
+    private fun observeData() {
         vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
@@ -78,14 +77,16 @@ class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.f
                     }
                     binding.tvResultRemark.apply {
                         isVisible = state.data?.isNullOrEmpty() ?: false
-                        text = resources.getString(com.dedechandran.movieapps.R.string.favorite_empty_result_remark)
+                        text =
+                            resources.getString(com.dedechandran.movieapps.R.string.favorite_empty_result_remark)
                     }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.tvResultRemark.apply {
                         visibility = View.VISIBLE
-                        text = resources.getString(com.dedechandran.movieapps.R.string.something_went_wrong_remark)
+                        text =
+                            resources.getString(com.dedechandran.movieapps.R.string.something_went_wrong_remark)
                     }
                 }
             }

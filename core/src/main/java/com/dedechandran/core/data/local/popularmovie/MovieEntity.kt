@@ -13,7 +13,7 @@ data class MovieEntity(
     @ColumnInfo(name = "overview") val overview: String?,
     @ColumnInfo(name = "release_date") val releaseDate: String?,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
-    @ColumnInfo(name = "genres") val genres: String,
+    @ColumnInfo(name = "genres") val genres: String?,
     @ColumnInfo(name = "runtime") val runtime: Int?,
     @ColumnInfo(name = "vote_average") val voteAverage: Double?,
     @ColumnInfo(name = "movie_type") val movieType: String,

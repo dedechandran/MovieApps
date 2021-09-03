@@ -20,7 +20,6 @@ import javax.inject.Inject
 class FavoriteMovieViewModel @Inject constructor(
     private val getMovieGenreUseCase: GetMovieGenreUseCase,
     private val getFavoriteMovieUseCase: GetFavoriteMovieUseCase,
-    private val updateFavoriteMovieStateUseCase: UpdateFavoriteMovieStateUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<Resource<List<CardItem>>>()
@@ -48,10 +47,14 @@ class FavoriteMovieViewModel @Inject constructor(
                     _state.value = Resource.Success(data = it)
                 }
                 .catch {
-                    _state.value = Resource.Error("Something went wrong")
+                    _state.value = Resource.Error(ERROR_MESSAGE)
                 }
                 .launchIn(this)
         }
         isInitialize = true
+    }
+
+    companion object {
+        private const val ERROR_MESSAGE = "Something went wrong"
     }
 }

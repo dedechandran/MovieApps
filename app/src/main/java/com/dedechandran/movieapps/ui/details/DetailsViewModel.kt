@@ -32,7 +32,7 @@ class DetailsViewModel @Inject constructor(
                     response = it
                 }
                 .catch {
-                    _state.value = Resource.Error("Something went wrong")
+                    _state.value = Resource.Error(ERROR_MESSAGE)
                 }
                 .launchIn(this)
         }
@@ -49,4 +49,7 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    companion object {
+        private const val ERROR_MESSAGE = "Something went wrong"
+    }
 }

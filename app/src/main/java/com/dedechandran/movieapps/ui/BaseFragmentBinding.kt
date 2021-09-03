@@ -1,4 +1,4 @@
-package com.dedechandran.movieapps
+package com.dedechandran.movieapps.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
