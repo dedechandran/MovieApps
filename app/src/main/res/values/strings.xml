@@ -10,5 +10,6 @@
     <string name="synopsis_header">Synopsis</string>
     <string name="favorite_empty_result_remark">There is no favorite movies.</string>
     <string name="empty_result_remark">No Movie Available</string>
+    <string name="no_network_connection_message">No network connection</string>
     <string name="something_went_wrong_remark">Oopss, something went wrong.</string>
 </resources>
