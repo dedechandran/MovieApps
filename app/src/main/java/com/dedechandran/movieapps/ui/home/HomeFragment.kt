@@ -1,11 +1,9 @@
 package com.dedechandran.movieapps.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
@@ -25,11 +23,15 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
         return FragmentHomeBinding.bind(view)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreateView(inflater, container, savedInstanceState)
+    @InternalCoroutinesApi
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUi()
+        vm.initialize()
+        observeData()
+    }
+
+    private fun setupUi() {
         binding.rvPopularMovie.apply {
             setOnFavoriteClickListener { id, isFavorite ->
                 vm.onFavoriteIconClicked(id = id, isFavorite = isFavorite)
@@ -44,13 +46,9 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
         binding.tvToolbarTitle.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
-        return binding.root
     }
 
-    @InternalCoroutinesApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        vm.initialize()
+    private fun observeData() {
         vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
@@ -61,11 +59,17 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
                     state.data?.let {
                         binding.rvPopularMovie.setItems(it)
                     }
+                    binding.tvResultRemark.apply {
+                        isVisible = state.data?.isNullOrEmpty() ?: false
+                        text = resources.getString(R.string.empty_result_remark)
+                    }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
-                        .show()
+                    binding.tvResultRemark.apply {
+                        visibility = View.VISIBLE
+                        text = resources.getString(R.string.something_went_wrong_remark)
+                    }
                 }
             }
         }

@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.movieapps.BaseFragmentBinding
-import com.dedechandran.movieapps.ui.details.DetailsFragment.Companion.MOVIE_ID_EXTRAS
+import com.dedechandran.movieapps.di.FavoriteDependencies
 import com.dedechandran.movieapps.favorite.databinding.FragmentFavoriteBinding
 import com.dedechandran.movieapps.favorite.di.DaggerFavoriteComponent
-import com.dedechandran.movieapps.di.FavoriteDependencies
 import com.dedechandran.movieapps.favorite.di.ViewModelFactory
+import com.dedechandran.movieapps.ui.details.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
@@ -79,11 +79,17 @@ class FavoriteFragment : BaseFragmentBinding<FragmentFavoriteBinding>(R.layout.f
                     state.data?.let {
                         binding.rvFavoriteMovie.setItems(it)
                     }
+                    binding.tvResultRemark.apply {
+                        isVisible = state.data?.isNullOrEmpty() ?: false
+                        text = resources.getString(com.dedechandran.movieapps.R.string.favorite_empty_result_remark)
+                    }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT)
-                        .show()
+                    binding.tvResultRemark.apply {
+                        visibility = View.VISIBLE
+                        text = resources.getString(com.dedechandran.movieapps.R.string.something_went_wrong_remark)
+                    }
                 }
             }
         }

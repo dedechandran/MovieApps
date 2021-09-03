@@ -24,18 +24,24 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
         return FragmentDetailsBinding.bind(view)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = arguments?.getString(MOVIE_ID_EXTRAS) ?: DEFAULT_MOVIE_ID
         setListener(args)
         vm.initialize(args.toInt())
+        observeData()
+    }
+
+    private fun setListener(args: String) {
+        binding.ivFavoriteIcon.setOnClickListener {
+            vm.onFavoriteIconClicked(args)
+        }
+        binding.ivArrowBack.setOnClickListener {
+            navController.popBackStack()
+        }
+    }
+
+    private fun observeData(){
         vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
@@ -65,15 +71,6 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                 }
             }
-        }
-    }
-
-    private fun setListener(args: String) {
-        binding.ivFavoriteIcon.setOnClickListener {
-            vm.onFavoriteIconClicked(args)
-        }
-        binding.ivArrowBack.setOnClickListener {
-            navController.popBackStack()
         }
     }
 
