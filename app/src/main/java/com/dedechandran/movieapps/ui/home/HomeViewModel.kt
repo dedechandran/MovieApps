@@ -3,7 +3,12 @@ package com.dedechandran.movieapps.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dedechandran.core.domain.*
+import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
+import com.dedechandran.core.domain.movie.GetPopularMovieUseCase
+import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
+import com.dedechandran.core.domain.movie.model.Genre
+import com.dedechandran.core.domain.movie.model.Movie
+import com.dedechandran.core.domain.movie.model.toDisplayItem
 import com.dedechandran.core.ui.CardItem
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

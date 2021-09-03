@@ -1,9 +1,9 @@
 package com.dedechandran.movieapps.di
 
-import com.dedechandran.core.domain.GetFavoriteMovieUseCase
-import com.dedechandran.core.domain.GetMovieDetailsUseCase
-import com.dedechandran.core.domain.GetMovieGenreUseCase
-import com.dedechandran.core.domain.UpdateFavoriteMovieStateUseCase
+import com.dedechandran.core.domain.movie.GetFavoriteMovieUseCase
+import com.dedechandran.core.domain.movie.GetMovieDetailsUseCase
+import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
+import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

@@ -1,4 +1,4 @@
-package com.dedechandran.core.domain
+package com.dedechandran.core.domain.movie.model
 
 import com.dedechandran.core.ui.CardItem
 import com.dedechandran.core.utils.formatDate

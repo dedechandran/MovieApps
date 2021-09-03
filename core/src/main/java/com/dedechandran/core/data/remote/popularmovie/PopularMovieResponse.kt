@@ -1,7 +1,7 @@
 package com.dedechandran.core.data.remote.popularmovie
 
 import com.dedechandran.core.data.local.popularmovie.MovieEntity
-import com.dedechandran.core.domain.MovieType
+import com.dedechandran.core.domain.movie.model.MovieType
 import com.google.gson.annotations.SerializedName
 
 data class PopularMovieResponse(

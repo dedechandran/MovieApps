@@ -1,7 +1,7 @@
 package com.dedechandran.core.data
 
-import com.dedechandran.core.domain.Genre
-import com.dedechandran.core.domain.Movie
+import com.dedechandran.core.domain.movie.model.Genre
+import com.dedechandran.core.domain.movie.model.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface IMovieRepository {

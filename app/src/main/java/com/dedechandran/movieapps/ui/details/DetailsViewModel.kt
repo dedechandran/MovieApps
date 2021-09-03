@@ -3,9 +3,9 @@ package com.dedechandran.movieapps.ui.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dedechandran.core.domain.GetMovieDetailsUseCase
-import com.dedechandran.core.domain.Movie
-import com.dedechandran.core.domain.UpdateFavoriteMovieStateUseCase
+import com.dedechandran.core.domain.movie.GetMovieDetailsUseCase
+import com.dedechandran.core.domain.movie.model.Movie
+import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch

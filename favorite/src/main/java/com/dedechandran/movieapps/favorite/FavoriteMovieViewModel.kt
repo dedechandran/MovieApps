@@ -4,11 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dedechandran.core.domain.*
+import com.dedechandran.core.domain.movie.GetFavoriteMovieUseCase
+import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
+import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
+import com.dedechandran.core.domain.movie.model.Genre
+import com.dedechandran.core.domain.movie.model.Movie
+import com.dedechandran.core.domain.movie.model.toDisplayItem
 import com.dedechandran.core.ui.CardItem
-import com.dedechandran.core.utils.formatDate
 import com.dedechandran.core.wrapper.Resource
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

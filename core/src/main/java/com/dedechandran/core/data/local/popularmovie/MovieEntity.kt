@@ -3,7 +3,7 @@ package com.dedechandran.core.data.local.popularmovie
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dedechandran.core.domain.Movie
+import com.dedechandran.core.domain.movie.model.Movie
 
 @Entity(tableName = "movie")
 data class MovieEntity(

@@ -1,4 +1,4 @@
-package com.dedechandran.core.domain
+package com.dedechandran.core.domain.movie
 
 import com.dedechandran.core.data.MovieRepository
 import kotlinx.coroutines.Dispatchers

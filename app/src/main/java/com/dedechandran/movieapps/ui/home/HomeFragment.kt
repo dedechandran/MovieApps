@@ -43,7 +43,7 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
             setHasFixedSize(true)
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
-        binding.tvToolbarTitle.setOnClickListener {
+        binding.ivFavoriteIcon.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
     }
