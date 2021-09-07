@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
 import com.dedechandran.core.domain.movie.GetPopularMovieUseCase
-import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
 import com.dedechandran.core.domain.movie.model.Genre
 import com.dedechandran.core.domain.movie.model.Movie
 import com.dedechandran.core.domain.movie.model.toDisplayItem
@@ -48,7 +47,7 @@ class HomeViewModel @Inject constructor(
                 .onEach {
                     state.value = Resource.Success(data = it)
                 }
-                .catch { t ->
+                .catch {
                     state.value = Resource.Error(ERROR_MESSAGE)
                 }
                 .launchIn(this)
