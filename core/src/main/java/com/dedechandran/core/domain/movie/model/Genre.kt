@@ -1,4 +1,4 @@
-package com.dedechandran.core.domain
+package com.dedechandran.core.domain.movie.model
 
 data class Genre(
     val id: Int,

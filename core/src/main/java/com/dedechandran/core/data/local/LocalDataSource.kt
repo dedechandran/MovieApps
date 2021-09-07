@@ -34,4 +34,8 @@ class LocalDataSource @Inject constructor(
         return movieDao.getMovieById(movieId = movieId)
     }
 
+    override fun getFavoriteMovies(): Flow<List<MovieEntity>> {
+        return movieDao.getFavoriteMovies()
+    }
+
 }

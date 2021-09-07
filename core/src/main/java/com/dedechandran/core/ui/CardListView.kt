@@ -26,17 +26,12 @@ class CardListView @JvmOverloads constructor(
         super.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
     }
 
-
     fun setItems(items: List<CardItem>){
         cardListAdapter.submitList(items)
     }
 
     fun setOnItemClickListener(listener: (String) -> Unit){
         cardListAdapter.setOnItemClickListener(listener)
-    }
-
-    fun setOnFavoriteClickListener(listener: (String) -> Unit){
-        cardListAdapter.setOnFavoriteClickListener(listener)
     }
 
 }

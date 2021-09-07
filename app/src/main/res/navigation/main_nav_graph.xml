@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.dedechandran.movieapps.HomeFragment"
+        android:name="com.dedechandran.movieapps.ui.home.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
@@ -18,16 +18,23 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteGraph" />
+            app:destination="@id/favoriteGraph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
+
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.dedechandran.movieapps.DetailsFragment"
+        android:name="com.dedechandran.movieapps.ui.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 
     <include-dynamic
         android:id="@+id/favoriteGraph"
+        android:label="Favorite"
         app:moduleName="favorite"
         app:graphResName="favorite_graph" />
 
