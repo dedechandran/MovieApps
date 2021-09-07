@@ -48,7 +48,7 @@ class HomeViewModel @Inject constructor(
                 .onEach {
                     state.value = Resource.Success(data = it)
                 }
-                .catch {
+                .catch { t ->
                     state.value = Resource.Error(ERROR_MESSAGE)
                 }
                 .launchIn(this)

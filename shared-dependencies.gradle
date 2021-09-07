@@ -32,4 +32,17 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
     implementation "com.jakewharton.threetenabp:threetenabp:$threeten_version"
+
+    // testImplementation for pure JVM unit tests
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version"
+
+    // androidTestImplementation for Android instrumentation tests
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlin_coroutines_version"
+
+    // Mockito
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline_version"
+
+    testImplementation "androidx.arch.core:core-testing:$arch_test_version"
+    testImplementation "com.google.truth:truth:$google_truth_version"
 }
