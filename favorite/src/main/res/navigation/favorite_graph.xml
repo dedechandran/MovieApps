@@ -8,5 +8,18 @@
         android:id="@+id/favoriteFragment"
         android:name="com.dedechandran.movieapps.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            android:id="@+id/action_favoriteFragment_to_favoriteDetails"
+            app:destination="@id/favoriteDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteDetails"
+        android:name="com.dedechandran.movieapps.ui.details.DetailsFragment"
+        android:label="DetailsFragment" />
 </navigation>

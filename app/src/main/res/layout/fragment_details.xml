@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsFragment">
+    android:background="?attr/colorPrimary"
+    tools:context=".ui.details.DetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_2"
-            android:text="Details"
+            tools:text="Details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivFavoriteIcon"
             app:layout_constraintStart_toEndOf="@id/ivArrowBack"
@@ -108,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_1"
-                android:text="Duration"
+                android:text="@string/duration_label"
                 app:layout_constraintEnd_toEndOf="@+id/tvDurationValue"
                 app:layout_constraintStart_toStartOf="@+id/tvDurationValue"
                 app:layout_constraintTop_toBottomOf="@+id/tvDurationValue" />
@@ -118,7 +119,7 @@
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2020"
+                tools:text="2020"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvVoteAvgValue"
                 app:layout_constraintStart_toEndOf="@+id/tvDurationValue"
@@ -128,7 +129,7 @@
                 android:id="@+id/tvReleaseYearLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year"
+                android:text="@string/release_year_label"
                 app:layout_constraintEnd_toEndOf="@+id/tvReleaseYearValue"
                 app:layout_constraintStart_toStartOf="@+id/tvReleaseYearValue"
                 app:layout_constraintTop_toTopOf="@+id/tvDurationLabel" />
@@ -139,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
-                android:text="7.8"
+                tools:text="7.8"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvStatusValue"
                 app:layout_constraintStart_toEndOf="@+id/tvReleaseYearValue"
@@ -149,7 +150,7 @@
                 android:id="@+id/tvVoteAvgLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vote"
+                android:text="@string/average_vote_label"
                 app:layout_constraintEnd_toEndOf="@+id/tvVoteAvgValue"
                 app:layout_constraintStart_toStartOf="@+id/tvVoteAvgValue"
                 app:layout_constraintTop_toTopOf="@+id/tvReleaseYearLabel" />
@@ -160,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
-                android:text="Released"
+                tools:text="Released"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvVoteAvgValue"
@@ -170,7 +171,7 @@
                 android:id="@+id/tvStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="@string/status_label"
                 app:layout_constraintEnd_toEndOf="@+id/tvStatusValue"
                 app:layout_constraintStart_toStartOf="@+id/tvStatusValue"
                 app:layout_constraintTop_toTopOf="@+id/tvVoteAvgLabel" />
@@ -182,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_4"
                 android:layout_marginTop="@dimen/spacing_4"
-                android:text="Synopsis"
+                android:text="@string/synopsis_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDurationLabel" />
