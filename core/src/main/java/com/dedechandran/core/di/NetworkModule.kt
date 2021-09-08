@@ -4,8 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -14,6 +16,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Singleton
+    @Provides
+    fun provideCertificatePinner(): CertificatePinner {
+        return CertificatePinner.Builder()
+            .add("api.themoviedb.org", "sha256/+vqZVAzTqUP8BGkfl88yU7SQ3C8J2uNEa55B7RZjEg0=")
+            .build()
+    }
 
     @Singleton
     @Provides
@@ -33,11 +43,16 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
+    fun provideOkHttpClient(
+        interceptor: Interceptor,
+        certificatePinner: CertificatePinner
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
