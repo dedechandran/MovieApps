@@ -70,4 +70,10 @@ dependencies {
 
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
+    //SqliteChiper
+    implementation "net.zetetic:android-database-sqlcipher:$sqlite_chiper_version"
+
+    //Sqlite
+    implementation "androidx.sqlite:sqlite-ktx:$sqlite_version"
 }
