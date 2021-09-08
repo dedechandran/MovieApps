@@ -77,3 +77,4 @@ public *;
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
 *** rewind();
 }
+-keep class com.dedechandran.core.ui.CardListView
