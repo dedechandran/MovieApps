@@ -1,5 +1,6 @@
 package com.dedechandran.core.di
 
+import com.dedechandran.core.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +33,7 @@ object NetworkModule {
             val originalRequest = chain.request()
             val originalUrl = originalRequest.url
             val newUrl = originalUrl.newBuilder()
-                .addQueryParameter("api_key", "a4efaa7ae55e845278da0fd4549e3246")
+                .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
             val newRequest = originalRequest.newBuilder()
                 .url(newUrl)

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieApps">
+        android:theme="@style/Theme.MovieApps"
+        android:fullBackupContent="true">
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

@@ -15,9 +15,9 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        buildConfigField("String", "API_KEY", "\"a4efaa7ae55e845278da0fd4549e3246\"")
     }
 
     buildTypes {

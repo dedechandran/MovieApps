@@ -7,7 +7,6 @@ import com.dedechandran.core.domain.movie.model.Movie
 import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.movieapps.CoroutineTestRule
 import com.google.common.truth.Truth
-import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
@@ -18,7 +17,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.whenever
-import java.lang.Exception
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)

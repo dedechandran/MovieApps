@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dedechandran.core.domain.movie.GetFavoriteMovieUseCase
 import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
-import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
 import com.dedechandran.core.domain.movie.model.Genre
 import com.dedechandran.core.domain.movie.model.Movie
 import com.dedechandran.core.domain.movie.model.toDisplayItem

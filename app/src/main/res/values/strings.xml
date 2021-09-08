@@ -13,4 +13,7 @@
     <string name="favorite_icon_description">Favorite Icon</string>
     <string name="movie_image_details_description">Movie Image Details</string>
     <string name="title_favorite">Favorite</string>
+    <string name="successfully_added_movie_to_favorite_message">Added to favorite movies</string>
+    <string name="successfully_removed_movie_from_favorite_message">Removed from favorite movies</string>
+
 </resources>

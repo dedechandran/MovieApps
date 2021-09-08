@@ -11,6 +11,7 @@ import com.dedechandran.core.wrapper.Resource
 import com.dedechandran.movieapps.R
 import com.dedechandran.movieapps.databinding.FragmentDetailsBinding
 import com.dedechandran.movieapps.ui.BaseFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,44 +41,58 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
     }
 
     private fun observeData() {
-        vm.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is Resource.Loading -> {
-                    // Do nothing
-                }
-                is Resource.Success -> {
-                    val data = state.data
-                    data?.let {
-                        with(binding) {
-                            data.imageUrl?.let {
-                                Glide.with(requireContext()).load(data.imageUrl)
-                                    .into(ivMovieDetails)
+        with(viewLifecycleOwner) {
+            vm.state.observe(this) { state ->
+                when (state) {
+                    is Resource.Loading -> {
+                        // Do nothing
+                    }
+                    is Resource.Success -> {
+                        val data = state.data
+                        data?.let {
+                            with(binding) {
+                                data.imageUrl?.let {
+                                    Glide.with(requireContext()).load(data.imageUrl)
+                                        .into(ivMovieDetails)
+                                }
+                                    ?: ivMovieDetails.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                                tvToolbarTitle.text = data.title ?: DEFAULT_DETAILS
+                                tvSynopsisValue.text = data.overview ?: NO_DATA
+                                tvDurationValue.text = data.runtime?.convertDuration() ?: NO_DATA
+                                tvReleaseYearValue.text = data.releaseDate?.getYear() ?: NO_DATA
+                                tvStatusValue.text = data.status ?: NO_DATA
+                                tvVoteAvgValue.text = data.voteAverage?.toString() ?: NO_DATA
+                                val favoriteIcon = if (it.isFavorite) {
+                                    R.drawable.ic_baseline_favorite_24
+                                } else {
+                                    R.drawable.ic_baseline_favorite_border_24
+                                }
+                                ivFavoriteIcon.setImageResource(favoriteIcon)
                             }
-                                ?: ivMovieDetails.setImageResource(R.drawable.ic_baseline_broken_image_24)
-                            tvToolbarTitle.text = data.title ?: DEFAULT_DETAILS
-                            tvSynopsisValue.text = data.overview ?: NO_DATA
-                            tvDurationValue.text = data.runtime?.convertDuration() ?: NO_DATA
-                            tvReleaseYearValue.text = data.releaseDate?.getYear() ?: NO_DATA
-                            tvStatusValue.text = data.status ?: NO_DATA
-                            tvVoteAvgValue.text = data.voteAverage?.toString() ?: NO_DATA
-                            val favoriteIcon = if (it.isFavorite) {
-                                R.drawable.ic_baseline_favorite_24
-                            } else {
-                                R.drawable.ic_baseline_favorite_border_24
-                            }
-                            ivFavoriteIcon.setImageResource(favoriteIcon)
                         }
                     }
+                    is Resource.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            resources.getString(R.string.something_went_wrong_remark),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-                is Resource.Error -> {
-                    Toast.makeText(
-                        requireContext(),
-                        resources.getString(R.string.something_went_wrong_remark),
-                        Toast.LENGTH_SHORT
-                    ).show()
+            }
+            vm.favoriteEvent.observe(this) { isFavorited ->
+                if (isFavorited) {
+                    showSnackBar(resources.getString(R.string.successfully_added_movie_to_favorite_message))
+                } else {
+                    showSnackBar(resources.getString(R.string.successfully_removed_movie_from_favorite_message))
                 }
             }
         }
+
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     companion object {

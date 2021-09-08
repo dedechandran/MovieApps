@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.dedechandran.core.domain.movie.GetMovieDetailsUseCase
 import com.dedechandran.core.domain.movie.UpdateFavoriteMovieStateUseCase
 import com.dedechandran.core.domain.movie.model.Movie
+import com.dedechandran.core.utils.SingleLiveEvent
 import com.dedechandran.core.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -23,6 +24,7 @@ class DetailsViewModel @Inject constructor(
     private var response: Movie? = null
     private val _state = MutableLiveData<Resource<Movie>>()
     val state = _state
+    val favoriteEvent = SingleLiveEvent<Boolean>()
 
     fun initialize(movieId: Int) {
         viewModelScope.launch {
@@ -39,12 +41,14 @@ class DetailsViewModel @Inject constructor(
     }
 
     fun onFavoriteIconClicked(id: String) {
-        response?.let {
+        response?.let { movie ->
             viewModelScope.launch {
                 updateFavoriteMovieStateUseCase.updateFavoriteMovieState(
                     movieId = id.toInt(),
-                    isFavorite = !it.isFavorite
-                ).launchIn(this)
+                    isFavorite = !movie.isFavorite
+                )
+                    .onEach { favoriteEvent.value = !movie.isFavorite }
+                    .launchIn(this)
             }
         }
     }
