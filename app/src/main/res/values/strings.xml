@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">MovieApps</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_favorite">Favorite</string>
     <string name="duration_label">Duration</string>
     <string name="release_year_label">Year</string>
     <string name="average_vote_label">Vote</string>
@@ -12,4 +9,8 @@
     <string name="empty_result_remark">No Movie Available</string>
     <string name="no_network_connection_message">No network connection</string>
     <string name="something_went_wrong_remark">Oopss, something went wrong.</string>
+    <string name="arrow_back_icon_description">Arrow Back Icon</string>
+    <string name="favorite_icon_description">Favorite Icon</string>
+    <string name="movie_image_details_description">Movie Image Details</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

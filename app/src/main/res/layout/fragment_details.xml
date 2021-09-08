@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     tools:context=".ui.details.DetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_4"
             android:background="?attr/actionBarItemBackground"
+            android:contentDescription="@string/arrow_back_icon_description"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_2"
-            tools:text="Details"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivFavoriteIcon"
             app:layout_constraintStart_toEndOf="@id/ivArrowBack"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Details" />
 
         <ImageView
             android:id="@+id/ivFavoriteIcon"
@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_4"
             android:background="?attr/actionBarItemBackground"
+            android:contentDescription="@string/favorite_icon_description"
             android:src="@drawable/ic_baseline_favorite_border_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,8 +88,9 @@
                     android:id="@+id/ivMovieDetails"
                     android:layout_width="300dp"
                     android:layout_height="450dp"
+                    android:contentDescription="@string/movie_image_details_description"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/test" />
+                    tools:src="@color/black" />
 
             </androidx.cardview.widget.CardView>
 
@@ -98,11 +100,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_4"
-                android:text="1h 30m"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvReleaseYearValue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvMovieDetails" />
+                app:layout_constraintTop_toBottomOf="@id/cvMovieDetails"
+                tools:text="1h 30m" />
 
             <TextView
                 android:id="@+id/tvDurationLabel"
@@ -119,11 +121,11 @@
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="2020"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvVoteAvgValue"
                 app:layout_constraintStart_toEndOf="@+id/tvDurationValue"
-                app:layout_constraintTop_toTopOf="@+id/tvDurationValue" />
+                app:layout_constraintTop_toTopOf="@+id/tvDurationValue"
+                tools:text="2020" />
 
             <TextView
                 android:id="@+id/tvReleaseYearLabel"
@@ -140,11 +142,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
-                tools:text="7.8"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/tvStatusValue"
                 app:layout_constraintStart_toEndOf="@+id/tvReleaseYearValue"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue"
+                tools:text="7.8" />
 
             <TextView
                 android:id="@+id/tvVoteAvgLabel"
@@ -161,11 +163,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_4"
-                tools:text="Released"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvVoteAvgValue"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseYearValue"
+                tools:text="Released" />
 
             <TextView
                 android:id="@+id/tvStatusLabel"

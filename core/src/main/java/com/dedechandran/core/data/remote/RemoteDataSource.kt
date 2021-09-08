@@ -8,7 +8,7 @@ class RemoteDataSource @Inject constructor(
     private val apiService: ApiService
 ) : IRemoteDataSource {
 
-    override suspend fun getPopularMovie():PopularMovieResponse {
+    override suspend fun getPopularMovie(): PopularMovieResponse {
         return apiService.getMoviePopularList()
     }
 

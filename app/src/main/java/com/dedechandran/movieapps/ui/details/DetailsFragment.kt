@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.dedechandran.core.utils.convertDuration
 import com.dedechandran.core.utils.getYear
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.movieapps.ui.BaseFragmentBinding
 import com.dedechandran.movieapps.R
 import com.dedechandran.movieapps.databinding.FragmentDetailsBinding
+import com.dedechandran.movieapps.ui.BaseFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +39,7 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
         }
     }
 
-    private fun observeData(){
+    private fun observeData() {
         vm.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading -> {
@@ -50,8 +50,10 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
                     data?.let {
                         with(binding) {
                             data.imageUrl?.let {
-                                Glide.with(requireContext()).load(data.imageUrl).into(ivMovieDetails)
-                            }?: ivMovieDetails.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                                Glide.with(requireContext()).load(data.imageUrl)
+                                    .into(ivMovieDetails)
+                            }
+                                ?: ivMovieDetails.setImageResource(R.drawable.ic_baseline_broken_image_24)
                             tvToolbarTitle.text = data.title ?: DEFAULT_DETAILS
                             tvSynopsisValue.text = data.overview ?: NO_DATA
                             tvDurationValue.text = data.runtime?.convertDuration() ?: NO_DATA
@@ -68,7 +70,11 @@ class DetailsFragment : BaseFragmentBinding<FragmentDetailsBinding>(R.layout.fra
                     }
                 }
                 is Resource.Error -> {
-                    Toast.makeText(requireContext(), resources.getString(R.string.something_went_wrong_remark), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        resources.getString(R.string.something_went_wrong_remark),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -7,8 +7,8 @@ import com.dedechandran.core.data.remote.details.MovieDetailsResponse
 import com.dedechandran.core.data.remote.popularmovie.PopularMovieResponse
 import com.dedechandran.core.data.remote.popularmovie.toEntity
 import com.dedechandran.core.domain.movie.model.Genre
-import com.dedechandran.core.domain.movie.model.MovieType
 import com.dedechandran.core.domain.movie.model.Movie
+import com.dedechandran.core.domain.movie.model.MovieType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map

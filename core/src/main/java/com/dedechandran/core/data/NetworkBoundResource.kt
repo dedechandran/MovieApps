@@ -9,11 +9,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private val result: Flow<ResultType> = flow {
         val dbSource = loadFromDb().first()
-        if(shouldFetch(dbSource)){
+        if (shouldFetch(dbSource)) {
             val apiResponse = createCall()
             saveCallResult(apiResponse)
             emitAll(loadFromDb())
-        }else{
+        } else {
             emitAll(loadFromDb())
         }
     }

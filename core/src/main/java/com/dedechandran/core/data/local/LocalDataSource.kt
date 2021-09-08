@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val movieDao: MovieDao
-) : ILocalDataSource{
+) : ILocalDataSource {
 
     override fun getMovies(type: String): Flow<List<MovieEntity>> {
         return movieDao.getAllMovies(type = type)
@@ -27,7 +27,12 @@ class LocalDataSource @Inject constructor(
         runtime: Int?,
         voteAverage: Double?
     ) {
-        movieDao.updateMovieDetails(id = id, status = status, runtime = runtime, voteAverage = voteAverage)
+        movieDao.updateMovieDetails(
+            id = id,
+            status = status,
+            runtime = runtime,
+            voteAverage = voteAverage
+        )
     }
 
     override fun getMovieById(movieId: Int): Flow<MovieEntity> {

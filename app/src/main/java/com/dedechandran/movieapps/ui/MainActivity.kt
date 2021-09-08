@@ -1,14 +1,12 @@
 package com.dedechandran.movieapps.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import com.dedechandran.movieapps.R
 import com.dedechandran.movieapps.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.notify
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

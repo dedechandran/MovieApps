@@ -22,5 +22,4 @@ object DataSourceModule {
     fun provideRemoteDataSource(remoteDataSource: RemoteDataSource): IRemoteDataSource {
         return remoteDataSource
     }
-
 }

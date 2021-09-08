@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     tools:context=".ui.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_4"
             android:background="?attr/actionBarItemBackground"
+            android:contentDescription="@string/favorite_icon_description"
             android:src="@drawable/ic_baseline_favorite_24"
             app:layout_constraintBottom_toBottomOf="@+id/tvToolbarTitle"
             app:layout_constraintEnd_toEndOf="parent"

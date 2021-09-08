@@ -10,11 +10,11 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
     private var onItemClickListener: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardListViewHolder {
-        val layout = when(viewType){
+        val layout = when (viewType) {
             MOVIE_ITEM_TYPE -> R.layout.movie_item
             else -> R.layout.movie_item
         }
-        val view = LayoutInflater.from(parent.context).inflate(layout,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return CardListViewHolder(
             view = view,
             itemClickListener = onItemClickListener
@@ -26,33 +26,32 @@ class CardListViewAdapter : ListAdapter<CardItem, CardListViewHolder>(DIFF_CALLB
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(getItem(position)){
+        return when (getItem(position)) {
             is CardItem.Movie -> MOVIE_ITEM_TYPE
         }
     }
 
-    fun setOnItemClickListener(listener: (String) -> Unit){
+    fun setOnItemClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CardItem>(){
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CardItem>() {
             override fun areItemsTheSame(oldItem: CardItem, newItem: CardItem): Boolean {
-                return when(oldItem) {
+                return when (oldItem) {
                     is CardItem.Movie -> oldItem.id == (newItem as CardItem.Movie).id
                     else -> false
                 }
             }
 
             override fun areContentsTheSame(oldItem: CardItem, newItem: CardItem): Boolean {
-                return when(oldItem) {
+                return when (oldItem) {
                     is CardItem.Movie -> oldItem == newItem as CardItem.Movie
                     else -> false
                 }
             }
 
         }
-
 
 
         private const val MOVIE_ITEM_TYPE = 0

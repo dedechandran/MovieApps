@@ -1,7 +1,6 @@
 package com.dedechandran.core.domain.movie
 
 import com.dedechandran.core.data.IMovieRepository
-import com.dedechandran.core.data.MovieRepository
 import com.dedechandran.core.domain.movie.model.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -13,5 +12,4 @@ class GetMovieDetailsUseCase @Inject constructor(private val movieRepository: IM
     fun getMovieDetails(movieId: Int): Flow<Movie> {
         return movieRepository.getMovieDetails(movieId).flowOn(Dispatchers.IO)
     }
-
 }

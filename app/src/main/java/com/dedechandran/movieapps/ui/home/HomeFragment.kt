@@ -7,11 +7,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.movieapps.ui.BaseFragmentBinding
 import com.dedechandran.movieapps.R
-import com.dedechandran.movieapps.ui.details.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import com.dedechandran.movieapps.databinding.FragmentHomeBinding
+import com.dedechandran.movieapps.ui.BaseFragmentBinding
+import com.dedechandran.movieapps.ui.details.DetailsFragment.Companion.MOVIE_ID_EXTRAS
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class HomeFragment : BaseFragmentBinding<FragmentHomeBinding>(R.layout.fragment_
         return FragmentHomeBinding.bind(view)
     }
 
+    @FlowPreview
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

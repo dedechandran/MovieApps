@@ -15,7 +15,7 @@ import java.io.IOException
 import java.net.InetSocketAddress
 import javax.net.SocketFactory
 
-class ConnectionLiveData(private val context: Context) : LiveData<Boolean>() {
+class ConnectionLiveData(context: Context) : LiveData<Boolean>() {
 
     private lateinit var networkCallback: ConnectivityManager.NetworkCallback
     private val connectivityManager =

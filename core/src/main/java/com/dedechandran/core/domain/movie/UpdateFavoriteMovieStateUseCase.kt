@@ -1,7 +1,6 @@
 package com.dedechandran.core.domain.movie
 
 import com.dedechandran.core.data.IMovieRepository
-import com.dedechandran.core.data.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -13,5 +12,4 @@ class UpdateFavoriteMovieStateUseCase @Inject constructor(private val movieRepos
         return movieRepository.updateMovieFavoriteState(movieId = movieId, isFavorite = isFavorite)
             .flowOn(Dispatchers.IO)
     }
-
 }

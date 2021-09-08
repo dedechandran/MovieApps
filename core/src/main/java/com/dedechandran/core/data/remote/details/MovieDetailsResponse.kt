@@ -13,7 +13,7 @@ data class MovieDetailsResponse(
     @SerializedName("revenue") val revenue: Long?,
     @SerializedName("vote_average") val voteAverage: Double?,
     @SerializedName("status") val status: String?
-){
+) {
     data class Genre(
         @SerializedName("id") val id: Int,
         @SerializedName("name") val name: String
