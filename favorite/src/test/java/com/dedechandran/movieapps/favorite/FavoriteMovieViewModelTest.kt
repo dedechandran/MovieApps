@@ -1,12 +1,11 @@
-package com.dedechandran.movieapps.ui.home
+package com.dedechandran.movieapps.favorite
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.dedechandran.core.domain.movie.GetFavoriteMovieUseCase
 import com.dedechandran.core.domain.movie.GetMovieGenreUseCase
-import com.dedechandran.core.domain.movie.GetPopularMovieUseCase
 import com.dedechandran.core.domain.movie.model.Genre
 import com.dedechandran.core.domain.movie.model.Movie
 import com.dedechandran.core.wrapper.Resource
-import com.dedechandran.movieapps.CoroutineTestRule
 import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -22,7 +21,7 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class HomeViewModelTest {
+class FavoriteMovieViewModelTest{
 
     @get:Rule
     var coroutinesTestRule = CoroutineTestRule()
@@ -34,15 +33,15 @@ class HomeViewModelTest {
     private lateinit var getMovieGenreUseCase: GetMovieGenreUseCase
 
     @Mock
-    private lateinit var getPopularMovieUseCase: GetPopularMovieUseCase
+    private lateinit var getFavoriteMovieUseCase: GetFavoriteMovieUseCase
 
-    private lateinit var vm: HomeViewModel
+    private lateinit var vm: FavoriteMovieViewModel
 
     @Before
     fun setUp() {
-        vm = HomeViewModel(
+        vm = FavoriteMovieViewModel(
             getMovieGenreUseCase = getMovieGenreUseCase,
-            getPopularMovieUseCase = getPopularMovieUseCase
+            getFavoriteMovieUseCase = getFavoriteMovieUseCase
         )
         vm.state.observeForever { }
     }
@@ -52,12 +51,12 @@ class HomeViewModelTest {
         whenever(getMovieGenreUseCase.getMovieGenre()).thenReturn(flow {
             emit(createMockGenre())
         })
-        whenever(getPopularMovieUseCase.getPopularMovie()).thenReturn(flow {
-            emit(createMockPopularMovie())
+        whenever(getFavoriteMovieUseCase.getFavoriteMovie()).thenReturn(flow {
+            emit(createMockFavoriteMovie())
         })
         vm.initialize()
         verify(getMovieGenreUseCase).getMovieGenre()
-        verify(getPopularMovieUseCase).getPopularMovie()
+        verify(getFavoriteMovieUseCase).getFavoriteMovie()
         Truth.assertThat(vm.state.value).isInstanceOf(Resource.Success::class.java)
     }
 
@@ -78,7 +77,7 @@ class HomeViewModelTest {
         Genre(id = 4, name = "genre4")
     )
 
-    private fun createMockPopularMovie() = listOf(
+    private fun createMockFavoriteMovie() = listOf(
         Movie(
             id = "1",
             title = "movie1",
@@ -92,6 +91,4 @@ class HomeViewModelTest {
             status = "Released",
         )
     )
-
-
 }
